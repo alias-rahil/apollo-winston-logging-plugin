@@ -1,3 +1,5 @@
-export default function echo(arg: any) {
+function echo(arg: unknown) {
 	return arg;
 }
+
+export default echo;
