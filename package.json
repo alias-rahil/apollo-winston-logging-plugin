@@ -1,6 +1,6 @@
 {
     "name": "apollo-winston-logging-plugin",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "npm package template",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -12,14 +12,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/alias-rahil/echo.git"
+        "url": "git+https://github.com/alias-rahil/apollo-winston-logging-plugin.git"
     },
     "author": "alias-rahil",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/alias-rahil/echo/issues"
+        "url": "https://github.com/alias-rahil/apollo-winston-logging-plugin/issues"
     },
-    "homepage": "https://github.com/alias-rahil/echo#readme",
+    "homepage": "https://github.com/alias-rahil/apollo-winston-logging-plugin#readme",
     "husky": {
         "hooks": {
             "pre-commit": "npm run lint"
