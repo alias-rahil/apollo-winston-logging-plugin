@@ -1,6 +1,6 @@
 {
-    "name": "echo",
-    "version": "1.0.0",
+    "name": "apollo-winston-logging-plugin",
+    "version": "1.0.1",
     "description": "npm package template",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
