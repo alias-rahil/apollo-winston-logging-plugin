@@ -1,4 +1,10 @@
-### Installation:
-```sh
-npm i alias-rahil/apollo-winston-logging-plugin # npm i alias-rahil/apollo-winston-logging-plugin#1.0.1
+### Usage:
+```js
+import apolloWinstonLoggingPlugin from 'apollo-winston-logging-plugin';
+import { ApolloServer } from 'apollo-server';
+import { createLogger } from 'winston';
+const logger = createLogger();
+new ApolloServer({
+    plugins: [apolloWinstonLoggingPlugin(logger)],
+});
 ```
