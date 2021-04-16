@@ -2,6 +2,9 @@ import { nanoid } from 'nanoid';
 import { ApolloServerPlugin, GraphQLRequestListener } from 'apollo-server-plugin-base';
 import winston from 'winston';
 
+const stringify = (obj: unknown) => JSON.stringify(obj);
+const logger = winston.createLogger({ transports: [new winston.transports.Console()] });
+
 interface Options {
 	config?: {
 		didEncounterErrors?: boolean;
@@ -14,6 +17,8 @@ interface Options {
 		requestDidStart?: boolean;
 	}
 
+	winstonInstance?: winston.Logger;
+
 	levels?: {
 		debug?: string;
 		info?: string;
@@ -21,12 +26,7 @@ interface Options {
 	}
 }
 
-const stringify = (obj: unknown) => JSON.stringify(obj);
-
-const apolloWinstonLoggingPlugin = (
-	winstonInstance: winston.Logger,
-	opts: Options = {},
-): ApolloServerPlugin => {
+const apolloWinstonLoggingPlugin = (opts: Options = {}): ApolloServerPlugin => {
 	const {
 		didEncounterErrors = true,
 		didResolveOperation = false,
@@ -39,6 +39,7 @@ const apolloWinstonLoggingPlugin = (
 	} = opts.config || {};
 
 	const { debug = 'debug', info = 'info', error = 'error' } = opts.levels || {};
+	const { winstonInstance = logger } = opts;
 
 	return {
 		requestDidStart(context) {
@@ -55,7 +56,7 @@ const apolloWinstonLoggingPlugin = (
 			}
 			const handlers: GraphQLRequestListener = {
 				didEncounterErrors({ errors }) {
-					if (didEncounterErrors) winstonInstance.log(error, stringify({ id, event: 'errors', errors }));
+					if (didEncounterErrors) { winstonInstance.log(error, stringify({ id, event: 'errors', errors })); }
 				},
 
 				willSendResponse({ response }) {
@@ -76,15 +77,17 @@ const apolloWinstonLoggingPlugin = (
 					}
 				},
 				executionDidStart(ctx) {
-					if (executionDidStart) winstonInstance.log(debug, stringify({ id, event: 'executionDidStart', ctx }));
+					if (executionDidStart) { winstonInstance.log(debug, stringify({ id, event: 'executionDidStart', ctx })); }
 				},
 
 				parsingDidStart(ctx) {
-					if (parsingDidStart) winstonInstance.log(debug, stringify({ id, event: 'parsingDidStart', ctx }));
+					if (parsingDidStart) { winstonInstance.log(debug, stringify({ id, event: 'parsingDidStart', ctx })); }
 				},
 
 				validationDidStart(ctx) {
-					if (validationDidStart) winstonInstance.log(debug, stringify({ id, event: 'validationDidStart', ctx }));
+					if (validationDidStart) {
+						winstonInstance.log(debug, stringify({ id, event: 'validationDidStart', ctx }));
+					}
 				},
 
 				responseForOperation(ctx) {

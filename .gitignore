@@ -1,3 +1,6 @@
+# typedoc output directory
+docs/
+
 # Logs
 logs
 *.log
