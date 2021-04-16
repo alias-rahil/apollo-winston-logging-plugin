@@ -56,7 +56,9 @@ const apolloWinstonLoggingPlugin = (opts: Options = {}): ApolloServerPlugin => {
 			}
 			const handlers: GraphQLRequestListener = {
 				didEncounterErrors({ errors }) {
-					if (didEncounterErrors) { winstonInstance.log(error, stringify({ id, event: 'errors', errors })); }
+					if (didEncounterErrors) {
+						winstonInstance.log(error, stringify({ id, event: 'errors', errors }));
+					}
 				},
 
 				willSendResponse({ response }) {
@@ -77,11 +79,15 @@ const apolloWinstonLoggingPlugin = (opts: Options = {}): ApolloServerPlugin => {
 					}
 				},
 				executionDidStart(ctx) {
-					if (executionDidStart) { winstonInstance.log(debug, stringify({ id, event: 'executionDidStart', ctx })); }
+					if (executionDidStart) {
+						winstonInstance.log(debug, stringify({ id, event: 'executionDidStart', ctx }));
+					}
 				},
 
 				parsingDidStart(ctx) {
-					if (parsingDidStart) { winstonInstance.log(debug, stringify({ id, event: 'parsingDidStart', ctx })); }
+					if (parsingDidStart) {
+						winstonInstance.log(debug, stringify({ id, event: 'parsingDidStart', ctx }));
+					}
 				},
 
 				validationDidStart(ctx) {
