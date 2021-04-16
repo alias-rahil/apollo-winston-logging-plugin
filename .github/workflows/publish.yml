@@ -17,6 +17,7 @@ jobs:
         run: |
           npm install
           npm publish
+          npm run typedoc:generate
           git config user.name $REPO_OWNER
           git add -f docs
           git commit --amend --allow-empty-message -m '' --reset-author
